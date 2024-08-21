@@ -3,70 +3,70 @@ const stock = [
         nombre: 'Camiseta River Plate 23/24',
         ligaArgentina: true,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 1,
     },
     {
         nombre: 'Camiseta Boca Juniors 23/24',
         ligaArgentina: true,
         precio: '$912',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 2,
     },
     {
         nombre: 'Camiseta Racing 23/24',
         ligaArgentina: true,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 3,
     },
     {
         nombre: 'Camiseta Independiente 23/24',
         ligaArgentina: true,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 4,
     },
     {
         nombre: 'Camiseta Barcelona 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 5,
     },
     {
         nombre: 'Camiseta Real Madrid 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 6,
     },
     {
         nombre: 'Camiseta Inter Miami 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 7,
     },
     {
         nombre: 'Camiseta Manchester City 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 8,
     },
     {
         nombre: 'Camiseta Liverpool 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 9,
     },
     {
         nombre: 'Camiseta Chelsea 23/24',
         ligaArgentina: false,
         precio: '$10.000',
-        imagen: asdasd,
+        imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 10,
     },
 ];
@@ -81,13 +81,20 @@ function crearCard(producto){
     nombre.innerText = producto.nombre;
     
     const img = document.createElement("img");
-    img = producto.imagen;
+    img.src = producto.imagen;
 
     const precio = document.createElement("p");
     precio.innerText = producto.precio;
 
+    const agregar = document.createElement("button");
+    agregar.innerText = "Agregar al Carrito"
+    agregar.addEventListener("click", () => {
+        alert("boludo");
+    })
+
     card.append(nombre);
-    card.append(imagen);
+    card.append(img);
+    card.append(agregar);
     card.append(precio);
 
     container.append(card);

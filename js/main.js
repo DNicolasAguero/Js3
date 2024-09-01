@@ -108,11 +108,9 @@ function crearCard(producto){
     precio.innerText = producto.precio;
 
     const agregar = document.createElement("button");
-    agregar.innerHTML = `id= "${producto.id}"`
-    agregar.innerText = "Agregar al Carrito"
-    agregar.addEventListener("click", () => {
-        alert("Producto agregado al carrito!");
-    })
+    agregar.setAttribute("id", producto.id);
+    agregar.className = "botonAgregar";
+    agregar.innerText = "Agregar al Carrito";
 
     card.append(nombre);
     card.append(img);
@@ -125,6 +123,7 @@ function crearCard(producto){
 function mostrarProductos(productos) {
     container.innerHTML = '';
     productos.forEach(producto => crearCard(producto));
+    actualizarBotonesCarrito();
 }
 
 mostrarProductos(stock);
@@ -154,3 +153,20 @@ botonesNav.forEach(boton => {
         mostrarProductos(productosFiltrados);
     });
 });
+
+const productosDelCarrito = [];
+
+function actualizarBotonesCarrito() {
+    botonesAgregar = document.querySelectorAll(".botonAgregar");
+
+    botonesAgregar.forEach(boton => {
+        boton.addEventListener("click", agregarAlCarrito);
+    });
+};
+
+function agregarAlCarrito(e) {
+    const idBoton = e.currentTarget.id;
+    const productoAgregado = stock.find(producto => producto.id == idBoton);
+    productosDelCarrito.push(productoAgregado);
+    console.log(productosDelCarrito);
+}

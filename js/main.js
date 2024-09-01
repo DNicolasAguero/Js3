@@ -1,77 +1,98 @@
 const stock = [
     {
         nombre: 'Camiseta River Plate 23/24',
-        ligaArgentina: true,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 1,
+        categoria: {
+        liga: 'Liga Argentina'
+        }
     },
     {
         nombre: 'Camiseta Boca Juniors 23/24',
-        ligaArgentina: true,
         precio: '$912',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 2,
+        categoria: {
+            liga: 'Liga Argentina'
+            }
     },
     {
         nombre: 'Camiseta Racing 23/24',
-        ligaArgentina: true,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 3,
+        categoria: {
+            liga: 'Liga Argentina'
+            }
     },
     {
         nombre: 'Camiseta Independiente 23/24',
-        ligaArgentina: true,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 4,
+        categoria: {
+            liga: 'Liga Argentina'
+            }
     },
     {
         nombre: 'Camiseta Barcelona 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 5,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
     {
         nombre: 'Camiseta Real Madrid 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 6,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
     {
         nombre: 'Camiseta Inter Miami 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 7,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
     {
         nombre: 'Camiseta Manchester City 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 8,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
     {
         nombre: 'Camiseta Liverpool 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 9,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
     {
         nombre: 'Camiseta Chelsea 23/24',
-        ligaArgentina: false,
         precio: '$10.000',
         imagen: `https://tiendariver.vteximg.com.br/arquivos/ids/170836-1000-1000/HT3679_1.png?v=638412018605830000`,
         id: 10,
+        categoria: {
+            liga: 'Otras ligas'
+            }
     },
 ];
 
 const container = document.getElementById("container");
+const botonesNav = document.querySelectorAll(".botonNav");
 
 function crearCard(producto){
     const card = document.createElement("div");
@@ -87,9 +108,10 @@ function crearCard(producto){
     precio.innerText = producto.precio;
 
     const agregar = document.createElement("button");
+    agregar.innerHTML = `id= "${producto.id}"`
     agregar.innerText = "Agregar al Carrito"
     agregar.addEventListener("click", () => {
-        alert("boludo");
+        alert("Producto agregado al carrito!");
     })
 
     card.append(nombre);
@@ -100,4 +122,35 @@ function crearCard(producto){
     container.append(card);
 };
 
-stock.forEach(el => crearCard(el));
+function mostrarProductos(productos) {
+    container.innerHTML = '';
+    productos.forEach(producto => crearCard(producto));
+}
+
+mostrarProductos(stock);
+
+botonesNav.forEach(boton => {
+    boton.addEventListener("click", (e) => {
+        botonesNav.forEach(boton => boton.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+        const categoriaSeleccionada = e.currentTarget.innerText;
+        let productosFiltrados;
+
+        if (categoriaSeleccionada === `Todos los productos`){
+            productosFiltrados = stock;
+        } else {
+            productosFiltrados = stock.filter(producto => producto.categoria.liga === categoriaSeleccionada);
+        }
+
+        if (categoriaSeleccionada === `Todos los productos`){
+            titulo.innerText = `Todos los productos`;
+        } else if (categoriaSeleccionada === `Liga Argentina`){
+            titulo.innerText = `Liga Argentina`;
+        } else if (categoriaSeleccionada === `Otras ligas`){
+            titulo.innerText = `Otras ligas`;
+        }
+
+        mostrarProductos(productosFiltrados);
+    });
+});
